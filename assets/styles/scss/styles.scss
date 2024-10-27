@@ -1,0 +1,259 @@
+@import 'variables';
+@import 'mixins';
+
+.d-flex {display: flex;}
+.d-flex--justify {justify-content: space-between;}
+.gap1{gap:1em}.gap2{gap:2em}.gap3{gap:3em}
+
+.text-uppercase {text-transform: uppercase;}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.sr-only:not(:focus):not(:active) {
+  clip: rect(0 0 0 0); 
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap; 
+  width: 1px;
+}
+
+button {
+  border: none;
+  width: auto; height: auto;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+body {
+  @include flexCenter(column);
+  height: 100vh;
+  background-color: $navy800;
+  font-size: 15px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+
+.timer-container {
+  position: relative;
+  width: 600px; aspect-ratio: 1/1;
+  @include flexCenter(column);
+  .progress-ring {
+    transform: rotate(-90deg);
+    width: $circleWidth; aspect-ratio: 1/1;
+    background: linear-gradient(50deg, #272c52 30%, $navy900 80%);
+    box-shadow: 10px -13px 50px $navy500;
+    border-radius: 50%;
+    .progress-ring__circle {
+      stroke: $theme1;
+      stroke-width: 8;
+      fill: transparent;
+      transition: stroke-dashoffset 1s linear;
+    }
+  }
+  .start-btn {
+    position: absolute;
+    top: 50%;
+    width: $circleWidth; aspect-ratio: 1/1;
+    border-radius: 50%;
+    transform: translateY(-50%);
+    span {
+      display: block;
+      margin-top: 10em;
+      text-transform: uppercase;
+      letter-spacing: 8px;
+      font-size: .7rem;
+      color: $lightBlue;
+    }
+  }
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: center;
+  background-color: $navy900;
+  transform: translateY(150%);
+  border-radius: 100vw;
+  position: relative;
+  z-index: 1;
+  .mode-button {
+    padding: 15px 20px;
+    font-size: .75rem;
+    text-transform: lowercase;
+    font-weight: 700;
+    border-radius: 100vw;
+    background-color: transparent !important;
+    color: rgba($lightBlue, .5);
+    transition: .3s background-color ease;
+    &.active {
+      color: $navy900;
+    }
+  }
+
+}
+
+.time-display {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 64px;
+  font-weight: bold;
+  color: $lightBlue;
+}
+
+
+
+#settings-btn {
+  margin-top: 10px;
+  color: $lightBlue;
+
+  //settings icon
+  img {
+    width: 20px;
+  }
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.modal-content {
+  background-color: #fff;
+  border-radius: 15px;
+  width: 320px;
+  position: relative;
+  .modal-header {
+    border-bottom: 1px solid $lightBlue;
+    padding: 20px;
+    .close-btn {
+      color: #999;
+      font-size: 1.2rem;
+    }
+  }
+  .modal-main {
+    padding: 10px 20px 30px;
+    font-size: 12px;
+    label {
+      font-weight: 700;
+      display: block;
+    }
+    .modal-row {
+      border-bottom: 1px solid $lightBlue;
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      &:last-of-type {
+        border-bottom: none;
+      }
+    }
+    .modal-heading {
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-top: 8px;
+      margin-bottom: 15px;
+    }
+    .option-col {
+      width: 33.33333%;
+      label {
+        text-transform: lowercase;
+        color: #bbb;
+        font-size: .65rem;
+        margin-bottom: 5px;
+      }
+      select {
+        width: 100%;
+        height: 35px;
+        border-radius: 5px;
+        background-color: #eef1f9;
+        border: none;
+        font-size: .8rem;
+        font-weight: 900;
+        padding-left: 10px;
+        appearance: none;
+        background-image: url(../../img/up-down.webp);
+        background-repeat: no-repeat;
+        background-size: 8px;
+        background-position: 90% center;
+      }
+    }
+    .theme-buttons {
+      .theme-btn {
+        width: 30px; height: 30px;
+        border-radius: 50%;
+        &.active {
+          &::after {
+            content: "✔";
+          }
+        }
+        &--1 {
+          background-color: $theme1;
+        }
+        &--2 {
+          background-color: $theme2;
+        }
+        &--3 {
+          background-color: $theme3;
+        }
+      }
+    }
+  }
+  .apply-btn {
+    color: #fff;
+    position: absolute;
+    left: 50%;
+    bottom: -18px;
+    transform: translateX(-50%);
+    padding: 10px 35px;
+    font-weight: 700;
+    border-radius: 100vw;
+  }
+}
+
+
+/* Theme classes */
+body, body.theme-default {
+  .apply-btn, .buttons-container .mode-button.active {
+    background-color: $theme1 !important;
+  }
+  .timer-container .progress-ring .progress-ring__circle {
+    stroke: $theme1;
+  }
+}
+
+body.theme-2 {
+  .apply-btn, .buttons-container .mode-button.active {
+    background-color: $theme2 !important;
+  }
+  .apply-btn {
+    color: $navy900;
+  }
+  .timer-container .progress-ring .progress-ring__circle {
+    stroke: $theme2;
+  }
+}
+
+body.theme-3 {
+  .apply-btn, .buttons-container .mode-button.active {
+    background-color: $theme3 !important;
+  }
+  .timer-container .progress-ring .progress-ring__circle {
+    stroke: $theme3;
+  }
+}

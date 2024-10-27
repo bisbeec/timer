@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Timer with Circular Progress Bar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles/css/styles.css">
+</head>
+<body>
+
+  <div class="buttons-container">
+    <button id="timer-btn" class="btn mode-button active">Pomodoro</button>
+    <button id="short-break-btn" class="btn mode-button">Short Break</button>
+    <button id="long-break-btn" class="btn mode-button">Long Break</button>
+  </div>
+
+  <div class="timer-container">
+    <svg class="progress-ring">
+      <circle class="progress-ring__circle" r="115" cx="140" cy="140"/>
+    </svg>
+    <div class="time-display" id="time">00:00</div>
+    <button id="start" class="start-btn">
+      <span>Start</span>
+    </button>
+  </div>
+  
+  <button id="settings-btn">
+    <span class="sr-only">Settings</span>
+    <img src="assets/img/settings-icon.webp" alt="Settings">
+  </button>
+
+  <!-- Popup Modal for Settings -->
+  <div id="settings-modal" class="modal">
+    <div class="modal-content">
+      <header class="d-flex d-flex--justify gap1 | modal-header">
+        <h3>Settings</h3>
+        <button class="close-btn">&times;
+          <span class="sr-only">close popup</span>
+        </button>
+      </header>
+      <div class="modal-main">
+        <label for="timer-duration" class="modal-heading">Time (minutes):</label>
+        <div class="d-flex d-flex--justify gap1 | modal-row">
+          <div class="option-col">
+            <label>Pomodoro</label>
+            <select id="timer-duration">
+              <option value="1">1</option>
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="15">15</option>
+              <option value="20">20</option>
+            </select>
+          </div>
+
+          <div class="option-col">
+            <label for="short-break-duration">Short Break</label>
+            <select id="short-break-duration">
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+
+          <div class="option-col">
+            <label for="long-break-duration">Long Break</label>
+            <select id="long-break-duration">
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="d-flex d-flex--justify gap1 | modal-row">
+          <label for="theme-color" class="modal-heading">Color</label>
+          <div class="theme-buttons | d-flex gap1">
+            <button class="theme-btn theme-btn--1" data-theme="default"></button>
+            <button class="theme-btn theme-btn--2" data-theme="2"></button>
+            <button class="theme-btn theme-btn--3" data-theme="3"></button>
+          </div>
+        </div>
+      </div>
+
+      <button id="save-settings" class="btn apply-btn">Apply</button>
+    </div>
+  </div>
+
+  <script src="assets/js/script.js"></script>
+</body>
+</html>
